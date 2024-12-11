@@ -1,0 +1,31 @@
+name = "api-auth"
+main = "src/index.ts"
+compatibility_date = "2024-12-11"
+
+compatibility_flags = [ "nodejs_compat" ]
+kv_namespaces = [
+  { binding = "API_KEYS", id = "d85756fcb133477a81311166a3d2254a", preview_id = "87413bd1fdd74d35869d78f25b444588" }
+]
+
+# [vars]
+# MY_VAR = "my-variable"
+
+# [[kv_namespaces]]
+# binding = "API_KEYS"
+# id = "d85756fcb133477a81311166a3d2254a"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""
+
+# [ai]
+# binding = "AI"
+
+# [observability]
+# enabled = true
+# head_sampling_rate = 1
