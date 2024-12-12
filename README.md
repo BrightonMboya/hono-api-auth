@@ -1,7 +1,8 @@
 ## API AUTH Demo
 
 The basics of this repo is to demonstrate the basic API AUTH in Hono. The idea is ur users create an API KEY, and 
-use the API KEY to authenticate users to your API. Its meant to be used as an alternative as saas like Unkey.
+use the API KEY to authenticate users to your API. 
+It stores the hashed keys on cloudlfare KV and uses hono as the api 
 
 Usage.
 - pnpm i
