@@ -36,7 +36,6 @@ function generateApiKey(): { fullKey: string; prefix: string } {
 const authenticateApiKey = async (c: Context, next: Next) => {
   const apiKey = c.req.header("X-API-Key");
 
-  // should also do a lookup on KV if the api key is real
   if (!apiKey) {
     return c.json({ error: "API key is required" }, 401);
   }
@@ -61,31 +60,10 @@ const authenticateApiKey = async (c: Context, next: Next) => {
 
 
 // Route to generate new API key
-// Generate new API key
-// app.post('/api/keys/generate', async (c) => {
-//   const userId = 'user_' + nanoid(10) // In real app, get from auth
-  
-//   const { fullKey, prefix } = generateApiKey()
-//   const hashedKey = hashApiKey(fullKey)
-  
-//   const keyData: APIKEY = {
-//     hashedKey,
-//     userId,
-//     createdAt: new Date().toISOString(),
-//     prefix
-//   }
-
-//   // Store using the hash as the key
-//   await c.env.API_KEYS.put(hashedKey, JSON.stringify(keyData))
-
-//   return c.json({ 
-//     apiKey: fullKey,
-//     message: "Store this API key securely - you won't be able to see it again"
-//   })
-// })
 
 app.post("/api/keys/generate", async (c) => {
   try {
+    // should fetch from the session on prod
     const userId = "user_" + nanoid(10);
     const { fullKey, prefix } = generateApiKey();
     const hashedKey = hashApiKey(fullKey);
@@ -97,9 +75,6 @@ app.post("/api/keys/generate", async (c) => {
       prefix,
     };
 
-    console.log("Generated API Key:", fullKey);
-    console.log("Hashed Key:", hashedKey);
-    console.log("Key Data:", keyData);
 
     // Try to store and immediately retrieve to verify
     await c.env.API_KEYS.put(hashedKey, JSON.stringify(keyData));
